@@ -1,0 +1,12 @@
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:focus {
+    outline-offset: .5rem;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

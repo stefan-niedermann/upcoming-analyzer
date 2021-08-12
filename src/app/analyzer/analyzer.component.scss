@@ -1,0 +1,29 @@
+:host {
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 50%);
+
+    @media (min-width: 640px) {
+        max-width: 1024px;
+        width: 80%;
+        margin: auto;
+    }
+}
+
+mat-card{
+    &:first-child {
+        grid-column: 1 / span 2
+    }
+}
+
+mat-slide-toggle {
+    display: block;
+}
+
+mat-icon {
+    font-size: 5rem;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+}
