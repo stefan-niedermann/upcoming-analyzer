@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
-import { AnalyzerComponent } from './analyzer/analyzer.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AnalyzerComponent
+    loadChildren: async () => (await import('./analyzer/analyzer.module')).AnalyzerModule
   },
   {
     path: 'about',
-    component: AboutComponent
+    loadChildren: async () => (await import('./about/about.module')).AboutModule
   },
   {
     path: '**',
