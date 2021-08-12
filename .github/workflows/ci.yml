@@ -56,7 +56,7 @@ jobs:
         with:
           name: bundle
           path: ./
-      - name: Sync files
+      - name: Upload files
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
           server: ${{ secrets.FTP_URL }}

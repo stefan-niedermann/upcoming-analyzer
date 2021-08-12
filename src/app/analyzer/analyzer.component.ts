@@ -17,10 +17,10 @@ export class AnalyzerComponent implements AfterViewInit {
     someoneElseAssigned: new FormControl()
   });
 
-  isSharedBoardCheckbox = this.form.get('isSharedBoard');
-  hasDueDateCheckbox = this.form.get('hasDueDate');
-  youAssignedCheckbox = this.form.get('youAssigned');
-  someoneElseAssignedCheckbox = this.form.get('someoneElseAssigned');
+  private readonly isSharedBoardCheckbox = this.form.get('isSharedBoard');
+  private readonly hasDueDateCheckbox = this.form.get('hasDueDate');
+  private readonly youAssignedCheckbox = this.form.get('youAssigned');
+  private readonly someoneElseAssignedCheckbox = this.form.get('someoneElseAssigned');
 
   explanation$: Observable<string> = EMPTY;
   cardIsVisible$: Observable<boolean> = EMPTY;
@@ -51,12 +51,11 @@ export class AnalyzerComponent implements AfterViewInit {
     this.icon$ = this.cardIsVisible$.pipe(
       map(cardIsVisible => cardIsVisible ? 'check_circle' : 'cancel')
     )
+    /**
+     * Card has a due date AND card is in a not shared board OR
+     * Card is in a board which is also shared with others AND (card is assigned to you OR (card has a due date AND nobody is assigned to the card))
+     */
     this.explanation$ = values$.pipe(map(next => {
-      /**
-       * 
-    Card has a due date AND card is in a not shared board
-    Card is in a board which is also shared with others AND (card is assigned to you OR (card has a due date AND nobody is assigned to the card))
-       */
       if(next.isSharedBoard && next.hasDueDate && next.youAssigned && next.someoneElseAssigned) {
         return 'Your card should be shown.';
       } else if(!next.isSharedBoard && next.hasDueDate && next.youAssigned && next.someoneElseAssigned) {
