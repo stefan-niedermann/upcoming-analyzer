@@ -1,8 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MockProvider} from 'ng-mocks'
-
-import { GeneratedLicenseFileAvailable, LicensesService } from './licenses.service';
+import { LicensesService } from './licenses.service';
 
 describe('LicensesService', () => {
   let service: LicensesService;
