@@ -12,15 +12,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'java', 'javascript' ]
+        language: 'javascript'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup Java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: 11
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
