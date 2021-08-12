@@ -1,0 +1,55 @@
+name: CI pipeline
+
+on: [ push, pull_request ]
+
+jobs:
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+      - name: Run frontend Unit tests
+        working-directory: frontend
+        run: npm run test
+
+  e2e-tests:
+    name: End to End tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+      - name: Run End to End tests
+        working-directory: frontend
+        run: npm run e2e
+      - name: Upload videos
+        uses: actions/upload-artifact@v2
+        with:
+          name: e2e-videos
+          path: cypress/videos
+
+  build-ui:
+    name: Build UI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+      - name: Build UI
+        working-directory: frontend
+        run: npm run build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+      - name: Upload bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: dist

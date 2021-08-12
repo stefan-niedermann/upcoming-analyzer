@@ -1,13 +1,14 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MockProvider} from 'ng-mocks'
 
-import { LicensesService } from './licenses.service';
+import { GeneratedLicenseFileAvailable, LicensesService } from './licenses.service';
 
 describe('LicensesService', () => {
   let service: LicensesService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(LicensesService);
+    service = new LicensesService(false, {} as any, {} as any);
   });
 
   it('should be created', () => {

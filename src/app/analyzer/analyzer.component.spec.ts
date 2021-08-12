@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material.module';
 
 import { AnalyzerComponent } from './analyzer.component';
 
@@ -8,6 +10,11 @@ describe('AnalyzerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule
+      ],
       declarations: [ AnalyzerComponent ]
     })
     .compileComponents();
