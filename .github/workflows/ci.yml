@@ -56,11 +56,7 @@ jobs:
         with:
           name: bundle
           path: ./
+      - name: Install lftp
+        run: sudo apt install lftp
       - name: Upload files
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
-        with:
-          server: ${{ secrets.FTP_URL }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-
+        run: lftp -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} -e "set ssl:verify-certificate no;mirror ${{ secrets.FTP_SERVER_DIR }}/.well-known ./; mirror -R ./ ${{ secrets.FTP_SERVER_DIR }}-${{ env.GITHUB_SHA }}; rm -r ${{ secrets.FTP_SERVER_DIR }}.bak; mv ${{ secrets.FTP_SERVER_DIR }} ${{ secrets.FTP_SERVER_DIR }}.bak; mv ${{ secrets.FTP_SERVER_DIR }}-${{ env.GITHUB_SHA }} ${{ secrets.SERVER_DIR }}; quit;" ${{ secrets.FTP_URL }}
