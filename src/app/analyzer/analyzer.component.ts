@@ -22,8 +22,8 @@ export class AnalyzerComponent implements AfterViewInit {
   private readonly youAssignedCheckbox = this.form.get('youAssigned');
   private readonly someoneElseAssignedCheckbox = this.form.get('someoneElseAssigned');
 
-  explanation$: Observable<Hint> = EMPTY;
   cardIsVisible$: Observable<boolean> = EMPTY;
+  hint$: Observable<Hint> = EMPTY;
   icon$: Observable<string> = EMPTY;
 
   ngAfterViewInit() {
@@ -55,7 +55,7 @@ export class AnalyzerComponent implements AfterViewInit {
      * Card has a due date AND card is in a not shared board OR
      * Card is in a board which is also shared with others AND (card is assigned to you OR (card has a due date AND nobody is assigned to the card))
      */
-    this.explanation$ = values$.pipe(map(next => {
+    this.hint$ = values$.pipe(map(next => {
       if (next.isSharedBoard && next.hasDueDate && next.youAssigned && next.someoneElseAssigned) {
         return Hint.CARD_SHOULD_BE_SHOWN;
       } else if (!next.isSharedBoard && next.hasDueDate && next.youAssigned && next.someoneElseAssigned) {

@@ -11,7 +11,8 @@
 
         grid-template-columns: repeat(2, 50%);
         mat-card{
-            &:first-child {
+            &:first-child,
+            &:last-child {
                 grid-column: 1 / span 2
             }
         }

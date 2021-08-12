@@ -22,5 +22,9 @@
 </mat-card>
 <mat-card>
     <mat-icon [color]="(cardIsVisible$ | async) ? 'accent' : 'warn'">{{(icon$ | async)}}</mat-icon>
-    {{explanation$ | async}}
+    {{hint$ | async}}
+</mat-card>
+<mat-card>
+    Did you know? There is an open source Android client for the Nextcloud Deck app, available at the <a
+        href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play">Google Play Store</a>.
 </mat-card>
