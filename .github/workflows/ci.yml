@@ -10,10 +10,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
-        working-directory: frontend
         run: npm ci
       - name: Run frontend Unit tests
-        working-directory: frontend
         run: npm run test
 
   e2e-tests:
@@ -23,16 +21,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
-        working-directory: frontend
         run: npm ci
       - name: Run End to End tests
-        working-directory: frontend
         run: npm run e2e
-      - name: Upload videos
-        uses: actions/upload-artifact@v2
-        with:
-          name: e2e-videos
-          path: cypress/videos
+#      - name: Upload videos
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: e2e-videos
+#          path: cypress/videos
 
   build-ui:
     name: Build UI
@@ -41,10 +37,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
-        working-directory: frontend
         run: npm ci
       - name: Build UI
-        working-directory: frontend
         run: npm run build
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
