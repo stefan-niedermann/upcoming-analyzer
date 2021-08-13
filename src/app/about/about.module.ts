@@ -4,6 +4,7 @@ import { AboutComponent } from './about.component';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatCardModule,
     MatIconModule,
+    MatButtonModule,
     RouterModule.forChild([
         {
           path: '',

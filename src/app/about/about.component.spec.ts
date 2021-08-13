@@ -5,6 +5,7 @@ import { MockProvider } from 'ng-mocks';
 import { EMPTY } from 'rxjs';
 import { LicensesService } from './licenses/licenses.service';
 import { AboutComponent } from './about.component';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -14,7 +15,8 @@ describe('AboutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MatCardModule,
-        MatIconModule
+        MatIconModule,
+        MatButtonModule
       ],
       providers: [
         MockProvider(LicensesService, {
