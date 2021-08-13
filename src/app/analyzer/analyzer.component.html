@@ -27,10 +27,10 @@
         </form>
     </mat-card-content>
 </mat-card>
-<mat-card>
-    <mat-card-header *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context">
-        <mat-icon mat-card-avatar [color]="context.cardIsVisible ? 'accent' : 'warn'">{{context.cardIsVisible ?
-            'check_circle' : 'cancel'}}</mat-icon>
+<mat-card *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context" class="result" [class.visible]="context.cardIsVisible">
+    <mat-card-header>
+        <mat-icon mat-card-avatar>{{context.cardIsVisible ?
+            'visibility' : 'visibility_off'}}</mat-icon>
         <mat-card-title>{{context.cardIsVisible ? 'Card is visible' : 'Card is not visible'}}</mat-card-title>
         <mat-card-subtitle>{{context.cardIsVisible ? 'Congratulations!' : 'Check out the hints below'}}
         </mat-card-subtitle>
