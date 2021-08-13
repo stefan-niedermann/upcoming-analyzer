@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MockProvider } from 'ng-mocks';
 import { EMPTY } from 'rxjs';
-import { LicensesService } from '../licenses/licenses.service';
+import { LicensesService } from './licenses/licenses.service';
 import { AboutComponent } from './about.component';
 
 describe('AboutComponent', () => {

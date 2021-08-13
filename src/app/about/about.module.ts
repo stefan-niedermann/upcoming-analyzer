@@ -4,6 +4,8 @@ import { AboutComponent } from './about.component';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { GeneratedLicenseFileAvailable } from './licenses/licenses.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -21,6 +23,9 @@ import { MatIconModule } from '@angular/material/icon';
           component: AboutComponent
         }
       ])
-  ]
+  ],
+  providers: [
+    { provide: GeneratedLicenseFileAvailable, useValue: environment.production }
+  ],
 })
 export class AboutModule { }

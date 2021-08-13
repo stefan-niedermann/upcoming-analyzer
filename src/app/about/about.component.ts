@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LicensesService } from '../licenses/licenses.service';
+import { LicensesService } from './licenses/licenses.service';
 
 @Component({
   selector: 'app-about',
