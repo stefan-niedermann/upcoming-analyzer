@@ -63,8 +63,8 @@ export interface CardDescription {
 }
 
 export enum Hint {
-  CARD_SHOULD_BE_SHOWN = 'Your card should be shown.',
-  SET_DUE_DATE = 'Set a due date to the card',
+  CARD_SHOULD_BE_SHOWN = 'Your card should be visible.',
+  SET_DUE_DATE = 'Set a due date to the card.',
   ASSIGN_CARD_OR_SET_DUE_DATE = 'Assign the card to you or set a due date.',
   ASSIGN_TO_YOU_OR_REMOVE_OTHERS = 'Assign the card to you or remove all other assignees from the card.',
   ASSIGN_TO_YOU_OR_SET_DUE_DATE_AND_REMOVE_OTHERS = 'Assign the card to you or set a due date and remove the other assignees.'
