@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject, EMPTY, merge, Observable, of, ReplaySubject, Subject } from 'rxjs';
-import { last, map, share, shareReplay, takeUntil } from 'rxjs/operators'
+import { EMPTY, merge, Observable, of, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators'
 import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
   templateUrl: './analyzer.component.html',
   styleUrls: ['./analyzer.component.scss']
 })
-export class AnalyzerComponent implements AfterViewInit, OnDestroy {
+export class AnalyzerComponent implements OnDestroy {
 
   form: FormGroup = new FormGroup({
     isSharedBoard: new FormControl(),
@@ -29,9 +29,7 @@ export class AnalyzerComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly analyzerService: AnalyzerService
-  ) { }
-
-  ngAfterViewInit() {
+  ) {
     const cardDescription$ = merge(
       of(this.getInitialCardDescription()),
       this.getCardDescription()
