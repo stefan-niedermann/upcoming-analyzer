@@ -13,30 +13,56 @@
     <mat-card-content>
         <form [formGroup]="form">
             <mat-slide-toggle formControlName="isSharedBoard">
-                Is your card on a shared board?
+                Is your card on a <strong>shared board</strong>?
             </mat-slide-toggle><br />
             <mat-slide-toggle formControlName="hasDueDate">
-                Does your card have a due date?
+                Does your card have a <strong>due date</strong>?
             </mat-slide-toggle><br />
             <mat-slide-toggle formControlName="youAssigned">
-                Are you assigned to this card?
+                <strong>Are you assigned</strong> to this card?
             </mat-slide-toggle><br />
             <mat-slide-toggle formControlName="someoneElseAssigned">
-                Is someone else assigned to this card?
+                Is <strong>someone else assigned</strong> to this card?
             </mat-slide-toggle>
         </form>
     </mat-card-content>
 </mat-card>
 <mat-card>
-    <mat-card-header>
-        <mat-icon mat-card-avatar [color]="(cardIsVisible$ | async) ? 'accent' : 'warn'">{{(cardIsVisible$ | async) ?
+    <mat-card-header *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context">
+        <mat-icon mat-card-avatar [color]="context.cardIsVisible ? 'accent' : 'warn'">{{context.cardIsVisible ?
             'check_circle' : 'cancel'}}</mat-icon>
-        <mat-card-title>{{(cardIsVisible$ | async) ? 'Card is visible' : 'Card is not visible'}}</mat-card-title>
-        <mat-card-subtitle>{{(cardIsVisible$ | async) ? 'Congratulations!' : 'Check out the hints below'}}
+        <mat-card-title>{{context.cardIsVisible ? 'Card is visible' : 'Card is not visible'}}</mat-card-title>
+        <mat-card-subtitle>{{context.cardIsVisible ? 'Congratulations!' : 'Check out the hints below'}}
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <p>{{hint$ | async}}</p>
+    </mat-card-content>
+</mat-card>
+<mat-card>
+    <mat-card-header>
+        <mat-icon mat-card-avatar>info</mat-icon>
+        <mat-card-title>Rules</mat-card-title>
+        <mat-card-subtitle>Learn in which cases a card appears in the upcoming view</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>Starting with Deck 1.5 cards will appear in the upcoming view if one of the following two cases matches:</p>
+        <ul>
+            <li>Card has a due date <strong>and</strong> card is in a not shared board</li>
+            <li>Card is in a board which is also shared with others <strong>and</strong> one of the following two cases
+                matches:
+                <ul>
+                    <li>card is assigned to you <strong>or</strong></li>
+                    <li>card has a due date
+                        <strong>and</strong>
+                        nobody is assigned to the card
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p>The Deck Android app currently display cards which match this pattern <a
+                href="https://github.com/stefan-niedermann/nextcloud-deck/issues/962" target="_blank">from
+                <strong>all</strong> accounts</a>.</p>
     </mat-card-content>
 </mat-card>
 <mat-card>
@@ -57,23 +83,4 @@
         <a mat-button target="_blank"
             href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play">Download</a>
     </mat-card-actions>
-</mat-card>
-<mat-card>
-    <mat-card-header>
-        <mat-icon mat-card-avatar>info</mat-icon>
-        <mat-card-title>Rules</mat-card-title>
-        <mat-card-subtitle>Learn in which cases a card appears in the upcoming view</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <p>Starting with Deck 1.5 cards will appear in the upcoming view if one of the following two cases matches:</p>
-        <ul>
-            <li>Card has a due date <strong>and</strong> card is in a not shared board</li>
-            <li>Card is in a board which is also shared with others <strong>and</strong> (card is assigned to you
-                <strong>or</strong> (card has a due date
-                <strong>and</strong>
-                nobody is assigned to the card))
-            </li>
-        </ul>
-        <p>The Deck Android app currently display cards which match this pattern <a href="https://github.com/stefan-niedermann/nextcloud-deck/issues/962" target="_blank">from <strong>all</strong> accounts</a>.</p>
-    </mat-card-content>
 </mat-card>
