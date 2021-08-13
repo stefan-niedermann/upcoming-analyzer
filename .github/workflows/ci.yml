@@ -41,7 +41,7 @@ jobs:
       - name: Build UI
         run: npm run build
       - name: Add .htaccess to bundle
-        run: mv .htaccess dist/upcoming-analyzer
+        run: mv .htaccess dist/upcoming-analyzer/.htaccess
       - name: Stash bundle
         uses: actions/upload-artifact@v2
         with:

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "nextcloud-deck-upcoming-analyzer": {
+    "upcoming-analyzer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/nextcloud-deck-upcoming-analyzer",
+            "outputPath": "dist/upcoming-analyzer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -75,18 +75,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "nextcloud-deck-upcoming-analyzer:build"
+            "browserTarget": "upcoming-analyzer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "nextcloud-deck-upcoming-analyzer:build:production"
+              "browserTarget": "upcoming-analyzer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "nextcloud-deck-upcoming-analyzer:build"
+            "browserTarget": "upcoming-analyzer:build"
           }
         },
         "test": {
@@ -115,18 +115,18 @@
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "nextcloud-deck-upcoming-analyzer:serve",
+            "devServerTarget": "upcoming-analyzer:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "nextcloud-deck-upcoming-analyzer:serve:production"
+              "devServerTarget": "upcoming-analyzer:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "nextcloud-deck-upcoming-analyzer"
+  "defaultProject": "upcoming-analyzer"
 }
