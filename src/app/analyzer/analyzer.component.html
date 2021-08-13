@@ -24,7 +24,8 @@
     <mat-card-header>
         <mat-icon mat-card-avatar [color]="(cardIsVisible$ | async) ? 'accent' : 'warn'">{{(icon$ | async)}}</mat-icon>
         <mat-card-title>{{(cardIsVisible$ | async) ? 'Card is visible' : 'Card is not visible'}}</mat-card-title>
-        <mat-card-subtitle>{{(cardIsVisible$ | async) ? 'Congratulations!' : 'Check out the hints below'}}</mat-card-subtitle>
+        <mat-card-subtitle>{{(cardIsVisible$ | async) ? 'Congratulations!' : 'Check out the hints below'}}
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <p>{{hint$ | async}}</p>
@@ -45,8 +46,8 @@
             Store</a>.
     </mat-card-content>
     <mat-card-actions>
-        <a href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play"
-            mat-button>Download</a>
+        <a mat-button target="_blank"
+            href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play">Download</a>
     </mat-card-actions>
 </mat-card>
 <mat-card>
@@ -57,9 +58,11 @@
         <p>Starting with Deck 1.5 cards will appear in the upcoming view if one of the following two cases matches:</p>
         <ul>
             <li>Card has a due date <strong>and</strong> card is in a not shared board</li>
-            <li>Card is in a board which is also shared with others <strong>and</strong> (card is assigned to you <strong>or</strong> (card has a due date
+            <li>Card is in a board which is also shared with others <strong>and</strong> (card is assigned to you
+                <strong>or</strong> (card has a due date
                 <strong>and</strong>
-                nobody is assigned to the card))</li>
+                nobody is assigned to the card))
+            </li>
         </ul>
     </mat-card-content>
 </mat-card>
