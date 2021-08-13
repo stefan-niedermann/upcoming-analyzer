@@ -11,8 +11,7 @@
 
         grid-template-columns: repeat(2, 50%);
         mat-card{
-            &:first-child,
-            &:last-child {
+            &:first-child {
                 grid-column: 1 / span 2
             }
         }
@@ -24,8 +23,7 @@ mat-slide-toggle {
 }
 
 mat-icon {
-    font-size: 3rem;
+    font-size: 40px;
     width: auto;
     height: auto;
-    vertical-align: middle;
 }

@@ -1,4 +1,4 @@
-# Nextcloud Deck upcoming analyzer
+# Upcoming Analyzer
 
 ## What is this?
 
