@@ -5,20 +5,27 @@
             href="https://apps.nextcloud.com/apps/deck">Nextcloud Deck</a> app.</p>
 </mat-card>
 <mat-card>
-    <form [formGroup]="form">
-        <mat-slide-toggle formControlName="isSharedBoard">
-            Is your card on a shared board?
-        </mat-slide-toggle><br />
-        <mat-slide-toggle formControlName="hasDueDate">
-            Does your card have a due date?
-        </mat-slide-toggle><br />
-        <mat-slide-toggle formControlName="youAssigned">
-            Are you assigned to this card?
-        </mat-slide-toggle><br />
-        <mat-slide-toggle formControlName="someoneElseAssigned">
-            Is someone else assigned to this card?
-        </mat-slide-toggle>
-    </form>
+    <mat-card-header>
+        <mat-icon mat-card-avatar>help</mat-icon>
+        <mat-card-title>Describe your card</mat-card-title>
+        <mat-card-subtitle>With this details we can tell you why your card is not shown</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="form">
+            <mat-slide-toggle formControlName="isSharedBoard">
+                Is your card on a shared board?
+            </mat-slide-toggle><br />
+            <mat-slide-toggle formControlName="hasDueDate">
+                Does your card have a due date?
+            </mat-slide-toggle><br />
+            <mat-slide-toggle formControlName="youAssigned">
+                Are you assigned to this card?
+            </mat-slide-toggle><br />
+            <mat-slide-toggle formControlName="someoneElseAssigned">
+                Is someone else assigned to this card?
+            </mat-slide-toggle>
+        </form>
+    </mat-card-content>
 </mat-card>
 <mat-card>
     <mat-card-header>
@@ -37,7 +44,7 @@
             src="https://raw.githubusercontent.com/stefan-niedermann/nextcloud-deck/master/app/src/main/ic_launcher-web.png"
             alt="Launcher icon of the Nextcloud Deck Android app" />
         <mat-card-title>Nextcloud Deck</mat-card-title>
-        <mat-card-subtitle>Android</mat-card-subtitle>
+        <mat-card-subtitle>Android app</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image src="../../assets/nextcloud-deck-android.jpg" alt="Photo of Nextcloud Deck Android app">
     <mat-card-content>
@@ -52,7 +59,9 @@
 </mat-card>
 <mat-card>
     <mat-card-header>
+        <mat-icon mat-card-avatar>info</mat-icon>
         <mat-card-title>Rules</mat-card-title>
+        <mat-card-subtitle>Learn in which cases a card appears in the upcoming view</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <p>Starting with Deck 1.5 cards will appear in the upcoming view if one of the following two cases matches:</p>
