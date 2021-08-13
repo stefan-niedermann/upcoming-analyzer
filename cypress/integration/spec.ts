@@ -3,9 +3,6 @@ describe('Analyzer main screen', () => {
   it('Visits the initial project page', () => {
     cy.visit('/');
     cy.contains("Upcoming Analyzer")
-    cy.contains("Card is not visible")
-    cy.get('[formControlName="hasDueDate"]').click()
-    cy.contains("Card is visible")
   })
 
   it('Should toggle the visibility result depending on the card description', () => {
