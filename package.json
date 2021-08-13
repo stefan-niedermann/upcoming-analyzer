@@ -1,5 +1,5 @@
 {
-  "name": "nextcloud-deck-upcoming-analyzer",
+  "name": "upcoming-analyzer",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

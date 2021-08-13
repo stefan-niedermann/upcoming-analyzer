@@ -41,12 +41,12 @@ jobs:
       - name: Build UI
         run: npm run build
       - name: Add .htaccess to bundle
-        run: mv .htaccess dist/nextcloud-deck-upcoming-analyzer
+        run: mv .htaccess dist/upcoming-analyzer
       - name: Stash bundle
         uses: actions/upload-artifact@v2
         with:
           name: bundle
-          path: dist/nextcloud-deck-upcoming-analyzer/
+          path: dist/upcoming-analyzer/
   
   deploy:
     name: Deploy
