@@ -1,15 +1,15 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { EMPTY, merge, Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
-import { AnalyzerService, Hint } from './analyzer.service';
+import { BehaviorSubject, EMPTY, merge, Observable, ReplaySubject, Subject } from 'rxjs';
+import { last, map, share, shareReplay, takeUntil } from 'rxjs/operators'
+import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
 
 @Component({
   selector: 'app-analyzer',
   templateUrl: './analyzer.component.html',
   styleUrls: ['./analyzer.component.scss']
 })
-export class AnalyzerComponent implements AfterViewInit {
+export class AnalyzerComponent implements AfterViewInit, OnDestroy {
 
   form: FormGroup = new FormGroup({
     isSharedBoard: new FormControl(),
@@ -18,6 +18,7 @@ export class AnalyzerComponent implements AfterViewInit {
     someoneElseAssigned: new FormControl()
   });
 
+  private readonly unsubscribe$ = new Subject<void>();
   private readonly isSharedBoardCheckbox = this.form.get('isSharedBoard');
   private readonly hasDueDateCheckbox = this.form.get('hasDueDate');
   private readonly youAssignedCheckbox = this.form.get('youAssigned');
@@ -25,29 +26,36 @@ export class AnalyzerComponent implements AfterViewInit {
 
   cardIsVisible$: Observable<boolean> = EMPTY;
   hint$: Observable<Hint> = EMPTY;
-  icon$: Observable<string> = EMPTY;
 
   constructor(
     private readonly analyzerService: AnalyzerService
-  ) {}
+  ) { }
 
   ngAfterViewInit() {
-    const values$ = merge(
+    const values$ = new ReplaySubject<CardDescription>();
+    merge(
       this.isSharedBoardCheckbox?.valueChanges || EMPTY,
       this.hasDueDateCheckbox?.valueChanges || EMPTY,
       this.youAssignedCheckbox?.valueChanges || EMPTY,
       this.someoneElseAssignedCheckbox?.valueChanges || EMPTY
-    ).pipe(map(() => {
-      return {
-        isSharedBoard: this.isSharedBoardCheckbox?.value,
-        hasDueDate: this.hasDueDateCheckbox?.value,
-        youAssigned: this.youAssignedCheckbox?.value,
-        someoneElseAssigned: this.someoneElseAssignedCheckbox?.value
-      }
-    }));
+    ).pipe(
+      takeUntil(this.unsubscribe$),
+      map(() => {
+        return {
+          isSharedBoard: this.isSharedBoardCheckbox?.value,
+          hasDueDate: this.hasDueDateCheckbox?.value,
+          youAssigned: this.youAssignedCheckbox?.value,
+          someoneElseAssigned: this.someoneElseAssignedCheckbox?.value
+        }
+      })
+    ).subscribe((next) => values$.next(next));
 
     this.cardIsVisible$ = values$.pipe(map(next => this.analyzerService.isVisible(next)))
-    this.icon$ = this.cardIsVisible$.pipe(map(cardIsVisible => cardIsVisible ? 'check_circle' : 'cancel'))
     this.hint$ = values$.pipe(map(next => this.analyzerService.mapCardDescriptionToHint(next)));
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

@@ -27,9 +27,15 @@
         </form>
     </mat-card-content>
 </mat-card>
-<mat-card>
+<mat-card *ngIf="form.pristine">
+    <mat-card-content>
+        <p>Answer the questions to your card</p>
+    </mat-card-content>
+</mat-card>
+<mat-card *ngIf="!form.pristine">
     <mat-card-header>
-        <mat-icon mat-card-avatar [color]="(cardIsVisible$ | async) ? 'accent' : 'warn'">{{(icon$ | async)}}</mat-icon>
+        <mat-icon mat-card-avatar [color]="(cardIsVisible$ | async) ? 'accent' : 'warn'">{{(cardIsVisible$ | async) ?
+            'check_circle' : 'cancel'}}</mat-icon>
         <mat-card-title>{{(cardIsVisible$ | async) ? 'Card is visible' : 'Card is not visible'}}</mat-card-title>
         <mat-card-subtitle>{{(cardIsVisible$ | async) ? 'Congratulations!' : 'Check out the hints below'}}
         </mat-card-subtitle>
