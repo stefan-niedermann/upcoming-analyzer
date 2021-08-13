@@ -4,8 +4,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MockProvider } from 'ng-mocks';
 
 import { AnalyzerComponent } from './analyzer.component';
+import { AnalyzerService } from './analyzer.service';
 
 describe('AnalyzerComponent', () => {
   let component: AnalyzerComponent;
@@ -20,6 +22,9 @@ describe('AnalyzerComponent', () => {
         MatSlideToggleModule,
         FormsModule,
         ReactiveFormsModule
+      ],
+      providers: [
+        MockProvider(AnalyzerService)
       ],
       declarations: [ AnalyzerComponent ]
     })
