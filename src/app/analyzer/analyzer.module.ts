@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -21,13 +22,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatTooltipModule,
     MatSlideToggleModule,
     RouterModule.forChild([
-        {
-          path: '',
-          component: AnalyzerComponent
-        }
-      ])
+      {
+        path: '',
+        component: AnalyzerComponent
+      }
+    ])
   ]
 })
 export class AnalyzerModule { }

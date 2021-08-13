@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MockProvider } from 'ng-mocks';
 
 import { AnalyzerComponent } from './analyzer.component';
@@ -20,6 +21,7 @@ describe('AnalyzerComponent', () => {
         MatIconModule,
         MatButtonModule,
         MatSlideToggleModule,
+        MatTooltipModule,
         FormsModule,
         ReactiveFormsModule
       ],

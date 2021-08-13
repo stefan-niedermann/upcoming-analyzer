@@ -24,6 +24,7 @@ export class AnalyzerComponent implements OnDestroy {
   private readonly youAssignedCheckbox = this.form.get('youAssigned');
   private readonly someoneElseAssignedCheckbox = this.form.get('someoneElseAssigned');
 
+  hintRef = Hint;
   cardIsVisible$: Observable<boolean> = EMPTY;
   hint$: Observable<Hint> = EMPTY;
 
