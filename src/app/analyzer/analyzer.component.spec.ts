@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../material.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AnalyzerComponent } from './analyzer.component';
 
@@ -11,7 +14,10 @@ describe('AnalyzerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        MaterialModule,
+        MatCardModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSlideToggleModule,
         FormsModule,
         ReactiveFormsModule
       ],

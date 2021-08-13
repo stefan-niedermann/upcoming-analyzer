@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MockProvider } from 'ng-mocks';
 import { EMPTY } from 'rxjs';
 import { LicensesService } from '../licenses/licenses.service';
-import { MaterialModule } from '../material.module';
-
 import { AboutComponent } from './about.component';
 
 describe('AboutComponent', () => {
@@ -12,7 +12,10 @@ describe('AboutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MaterialModule],
+      imports: [
+        MatCardModule,
+        MatIconModule
+      ],
       providers: [
         MockProvider(LicensesService, {
           getLicenses: () => EMPTY
