@@ -20,6 +20,10 @@ mat-card-content {
     line-height: 1.5;
 }
 
+mat-card-actions {
+    text-transform: uppercase;
+}
+
 mat-slide-toggle {
     display: block;
 }
