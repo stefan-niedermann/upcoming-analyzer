@@ -2,7 +2,7 @@
     padding: 2rem;
     display: grid;
     gap: 2rem;
-    grid-template-columns: 1;
+    grid-template-columns: 100%;
 
     @media (min-width: 640px) {
         max-width: 1024px;
