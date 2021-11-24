@@ -1,3 +1,5 @@
+import { cases } from '../../src/app/analyzer/cases';
+
 describe('Analyzer main screen', () => {
 
   it('Visits the initial project page', () => {
@@ -45,5 +47,26 @@ describe('Analyzer main screen', () => {
     cy.get('[formControlName="isSharedBoard"]').click()
     cy.get('[formControlName="someoneElseAssigned"] input').should('be.disabled')
     cy.get('[formControlName="someoneElseAssigned"] input').should('not.be.checked')
+  })
+
+  it('Should display appropriate hints for input', () => {
+    cases.forEach(([description, expected]) => {
+      cy.visit('/');
+
+      if (description.isSharedBoard) {
+        cy.get('[formControlName="isSharedBoard"]').click()
+      }
+      if (description.hasDueDate) {
+        cy.get('[formControlName="hasDueDate"]').click()
+      }
+      if (description.youAssigned) {
+        cy.get('[formControlName="youAssigned"]').click()
+      }
+      if (description.someoneElseAssigned) {
+        cy.get('[formControlName="someoneElseAssigned"]').click()
+      }
+
+      cy.contains(expected);
+    });
   })
 })
