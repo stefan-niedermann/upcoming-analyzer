@@ -12,7 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~13.3.11",
-    "@angular/cdk": "^13.3.5",
+    "@angular/cdk": "^14.0.0",
     "@angular/common": "~13.3.10",
     "@angular/compiler": "~13.3.10",
     "@angular/core": "~13.3.10",
@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "5.27.0",
     "@typescript-eslint/parser": "5.27.0",
     "cypress": "9.7.0",
-    "eslint": "^8.16.0",
+    "eslint": "^8.17.0",
     "jest": "^27.5.0",
     "jest-preset-angular": "^11.1.2",
     "ng-mocks": "^13.5.2",
