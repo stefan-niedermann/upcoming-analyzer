@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { EMPTY, merge, Observable, of, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators'
 import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
@@ -11,11 +11,11 @@ import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
 })
 export class AnalyzerComponent implements OnDestroy {
 
-  form: FormGroup = new FormGroup({
-    isSharedBoard: new FormControl(),
-    hasDueDate: new FormControl(),
-    youAssigned: new FormControl(),
-    someoneElseAssigned: new FormControl()
+  form: UntypedFormGroup = new UntypedFormGroup({
+    isSharedBoard: new UntypedFormControl(),
+    hasDueDate: new UntypedFormControl(),
+    youAssigned: new UntypedFormControl(),
+    someoneElseAssigned: new UntypedFormControl()
   });
 
   private readonly unsubscribe$ = new Subject<void>();
