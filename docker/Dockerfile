@@ -1,4 +1,4 @@
-FROM nginx:alpine-slim
+FROM nginx:alpine
 
 MAINTAINER Niedermann IT <info@niedermann.it>
 
