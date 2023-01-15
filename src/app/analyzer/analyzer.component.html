@@ -37,7 +37,7 @@
     </mat-card-header>
     <mat-card-content>
         <p>{{hint$ | async}}</p>
-        <a *ngIf="(hint$ | async) === hintRef.CARD_SHOULD_BE_SHOWN" mat-raised-button color="primary" matTooltip="The card is not shown?" matTooltipPosition="right" href="https://github.com/stefan-niedermann/nextcloud-deck-upcoming-analyzer/issues/new" target="_blank">Report bug</a>
+        <a *ngIf="(hint$ | async) === hintRef.CARD_SHOULD_BE_SHOWN" mat-raised-button color="primary" matTooltip="The card is not shown?" matTooltipPosition="right" href="https://github.com/stefan-niedermann/upcoming-analyzer/issues/new" target="_blank">Report bug</a>
     </mat-card-content>
 </mat-card>
 <mat-card>
