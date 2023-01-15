@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:apline-slim
 
 MAINTAINER Niedermann IT <info@niedermann.it>
 
