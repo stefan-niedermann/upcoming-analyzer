@@ -89,8 +89,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          context: docker
-          file: Dockerfile
+          context: .
+          file: docker/Dockerfile
           tags: ghcr.io/${{ github.repository }}:latest
   
 #  deploy:
