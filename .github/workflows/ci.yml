@@ -83,4 +83,3 @@ jobs:
         run: lftp -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} -e "set ssl:verify-certificate no; rm -r ${{ secrets.FTP_SERVER_DIR }}.bak; quit;" ${{ secrets.FTP_URL }}
       - name: Backup current bundle and deploy new bundle
         run: lftp -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} -e "set ssl:verify-certificate no; mv ${{ secrets.FTP_SERVER_DIR }} ${{ secrets.FTP_SERVER_DIR }}.bak; mv ${{ secrets.FTP_SERVER_DIR }}-${{ github.sha }} ${{ secrets.FTP_SERVER_DIR }}; quit;" ${{ secrets.FTP_URL }}
-          tags: ghcr.io/${{ github.repository }}:latest
