@@ -28,9 +28,9 @@ describe('AnalyzerComponent', () => {
       providers: [
         MockProvider(AnalyzerService)
       ],
-      declarations: [ AnalyzerComponent ]
+      declarations: [AnalyzerComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
