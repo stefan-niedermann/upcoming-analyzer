@@ -1,0 +1,34 @@
+$nextcloud-palette: (
+   50: #e1f4fd,
+   100: #b2e3f9,
+   200: #7fd1f6,
+   300: #4ebef1,
+   400: #28b1ef,
+   500: #02a3eb,
+   600: #0195dd,
+   700: #0083c9,
+   800: #0072b5,
+   900: #005293,
+   contrast: (
+      50: #fff,
+      100: #fff,
+      200: #fff,
+      300: #fff,
+      400: #fff,
+      500: #fff,
+      600: #fff,
+      700: #fff,
+      800: #fff,
+      900: #fff,
+   )
+);
+
+$nextcloud-palette-primary: mat.define-palette($nextcloud-palette);
+$nextcloud-palette-accent: mat.define-palette($nextcloud-palette);
+
+$nextcloud-theme-properties: (
+   color: (
+      primary: $nextcloud-palette-primary,
+      accent: $nextcloud-palette-accent
+   )
+);

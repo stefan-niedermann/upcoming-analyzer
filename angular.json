@@ -31,7 +31,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/main.css",
+              "src/styles/fonts.css",
+              {
+                "input": "src/styles/material-light.scss",
+                "inject": false,
+                "bundleName": "material-light"
+              },
+              {
+                "input": "src/styles/material-dark.scss",
+                "inject": false,
+                "bundleName": "material-dark"
+              }
             ],
             "scripts": [],
             "vendorChunk": true,

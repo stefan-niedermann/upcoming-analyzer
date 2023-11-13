@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+@import 'material';
+
+$nextcloud-theme: mat.define-light-theme($nextcloud-theme-properties);
+
+@layer material {
+  @include mat.core();
+  @include mat.all-component-themes($nextcloud-theme);
+}

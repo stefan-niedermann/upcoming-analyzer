@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+@import 'material';
+
+$nextcloud-theme: mat.define-dark-theme($nextcloud-theme-properties);
+
+@layer material {
+  body {
+    background-color: #303030;
+  }
+
+  @include mat.core();
+  @include mat.all-component-themes($nextcloud-theme);
+}
