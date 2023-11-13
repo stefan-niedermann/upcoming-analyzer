@@ -43,7 +43,7 @@
     "cypress": "^10.8.0",
     "eslint": "^8.23.1",
     "jest": "~28.0.1",
-    "jest-preset-angular": "^12.2.2",
+    "jest-preset-angular": "^12.2.6",
     "ng-mocks": "^14.11.0",
     "ts-jest": "^28.0.8",
     "ts-node": "~10.9.1",
