@@ -12,6 +12,7 @@ import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
 export class AnalyzerComponent implements OnDestroy {
 
   form: UntypedFormGroup = new UntypedFormGroup({
+    isDone: new UntypedFormControl(),
     isSharedBoard: new UntypedFormControl(),
     hasDueDate: new UntypedFormControl(),
     youAssigned: new UntypedFormControl(),
@@ -19,6 +20,7 @@ export class AnalyzerComponent implements OnDestroy {
   });
 
   private readonly unsubscribe$ = new Subject<void>();
+  private readonly isDoneCheckbox = this.form.get('isDone');
   private readonly isSharedBoardCheckbox = this.form.get('isSharedBoard');
   private readonly hasDueDateCheckbox = this.form.get('hasDueDate');
   private readonly youAssignedCheckbox = this.form.get('youAssigned');
@@ -47,6 +49,7 @@ export class AnalyzerComponent implements OnDestroy {
    */
   private getInitialCardDescription(): CardDescription {
     return {
+      isDone: !!this.isDoneCheckbox?.value,
       isSharedBoard: !!this.isSharedBoardCheckbox?.value,
       hasDueDate: !!this.hasDueDateCheckbox?.value,
       youAssigned: !!this.youAssignedCheckbox?.value,
@@ -59,12 +62,14 @@ export class AnalyzerComponent implements OnDestroy {
    */
   private getCardDescription(): Observable<CardDescription> {
     return merge(
+      this.isDoneCheckbox?.valueChanges || EMPTY,
       this.isSharedBoardCheckbox?.valueChanges || EMPTY,
       this.hasDueDateCheckbox?.valueChanges || EMPTY,
       this.youAssignedCheckbox?.valueChanges || EMPTY,
       this.someoneElseAssignedCheckbox?.valueChanges || EMPTY,
     ).pipe(map(() => {
       return {
+        isDone: this.isDoneCheckbox?.value,
         isSharedBoard: this.isSharedBoardCheckbox?.value,
         hasDueDate: this.hasDueDateCheckbox?.value,
         youAssigned: this.youAssignedCheckbox?.value,

@@ -9,8 +9,20 @@ export class AnalyzerService {
   constructor() { }
 
   public isVisible(cardDescription: CardDescription): boolean {
-    return (cardDescription.hasDueDate && !cardDescription.isSharedBoard) ||
-      (cardDescription.isSharedBoard && (cardDescription.youAssigned || (cardDescription.hasDueDate && !cardDescription.someoneElseAssigned)))
+    return !cardDescription.isDone && (
+      (
+        cardDescription.hasDueDate &&
+        !cardDescription.isSharedBoard
+      ) ||
+      (
+        cardDescription.isSharedBoard && (
+          cardDescription.youAssigned || (
+            cardDescription.hasDueDate &&
+            !cardDescription.someoneElseAssigned
+          )
+        )
+      )
+    )
   }
 
   /**
@@ -18,7 +30,9 @@ export class AnalyzerService {
    * Card is in a board which is also shared with others AND (card is assigned to you OR (card has a due date AND nobody is assigned to the card))
    */
   public mapCardDescriptionToHint(cardDescription: CardDescription): Hint {
-    if (cardDescription.isSharedBoard && cardDescription.hasDueDate && cardDescription.youAssigned && cardDescription.someoneElseAssigned) {
+    if (cardDescription.isDone) {
+      return Hint.CARD_MUST_NOT_BE_DONE;
+    } else if (cardDescription.isSharedBoard && cardDescription.hasDueDate && cardDescription.youAssigned && cardDescription.someoneElseAssigned) {
       return Hint.CARD_SHOULD_BE_SHOWN;
     } else if (!cardDescription.isSharedBoard && cardDescription.hasDueDate && cardDescription.youAssigned && cardDescription.someoneElseAssigned) {
       return Hint.CARD_SHOULD_BE_SHOWN;
@@ -56,6 +70,7 @@ export class AnalyzerService {
 }
 
 export interface CardDescription {
+  isDone: boolean;
   isSharedBoard: boolean;
   hasDueDate: boolean;
   youAssigned: boolean;
@@ -63,6 +78,7 @@ export interface CardDescription {
 }
 
 export enum Hint {
+  CARD_MUST_NOT_BE_DONE = 'Mark your card as "not completed".',
   CARD_SHOULD_BE_SHOWN = 'Your card should be visible.',
   SET_DUE_DATE = 'Set a due date to the card.',
   ASSIGN_CARD_OR_SET_DUE_DATE = 'Assign the card to you or set a due date.',
