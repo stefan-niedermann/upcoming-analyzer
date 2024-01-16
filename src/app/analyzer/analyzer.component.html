@@ -1,18 +1,21 @@
-<mat-card appearance="outlined">
-    <p>This app attempts to provide an easy guide to analyze <a
+<mat-card>
+    <mat-card-content>
+        This app attempts to provide an easy guide to analyze <a
             href="https://help.nextcloud.com/t/deck-upcoming-cards-how-does-the-filter-work-configurable/121690/2?u=stefan-niedermann">why
             your card does not appear in the upcoming cards view</a> of the <a
-            href="https://apps.nextcloud.com/apps/deck">Nextcloud Deck</a> app.</p>
+            href="https://apps.nextcloud.com/apps/deck">Nextcloud Deck</a> app.
+    </mat-card-content>
 </mat-card>
-<mat-card appearance="outlined">
+<mat-card>
     <mat-card-header>
         <mat-icon mat-card-avatar>help</mat-icon>
         <mat-card-title>Describe your card</mat-card-title>
-        <mat-card-subtitle>With this details we can tell you why your card is not shown</mat-card-subtitle>
+        <mat-card-subtitle>With these details we can tell you why your card is not shown</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <form [formGroup]="form">
-            <mat-slide-toggle formControlName="isDone"  matTooltip="Available since Deck 1.12.0" matTooltipPosition="after">
+            <mat-slide-toggle formControlName="isDone" matTooltip="Available since Deck 1.12.0"
+                matTooltipPosition="after">
                 Is your card <strong>marked as completed</strong>?
             </mat-slide-toggle><br />
             <mat-slide-toggle formControlName="isSharedBoard">
@@ -30,7 +33,8 @@
         </form>
     </mat-card-content>
 </mat-card>
-<mat-card appearance="outlined" *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context" class="result" [class.visible]="context.cardIsVisible">
+<mat-card *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context" class="result"
+    [class.visible]="context.cardIsVisible">
     <mat-card-header>
         <mat-icon mat-card-avatar>{{context.cardIsVisible ?
             'visibility' : 'visibility_off'}}</mat-icon>
@@ -38,19 +42,22 @@
         <mat-card-subtitle>{{context.cardIsVisible ? 'Congratulations!' : 'Check out the hints below'}}
         </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="explanation">
         <p>{{hint$ | async}}</p>
-        <a *ngIf="(hint$ | async) === hintRef.CARD_SHOULD_BE_SHOWN" mat-raised-button color="primary" matTooltip="The card is not shown?" matTooltipPosition="right" href="https://github.com/stefan-niedermann/upcoming-analyzer/issues/new" target="_blank">Report bug</a>
+        <a *ngIf="(hint$ | async) === hintRef.CARD_SHOULD_BE_SHOWN" mat-raised-button color="primary"
+            matTooltip="The card is not shown?" matTooltipPosition="right"
+            href="https://github.com/stefan-niedermann/upcoming-analyzer/issues/new" target="_blank">Report bug</a>
     </mat-card-content>
 </mat-card>
-<mat-card appearance="outlined">
+<mat-card>
     <mat-card-header>
         <mat-icon mat-card-avatar>info</mat-icon>
         <mat-card-title>Rules</mat-card-title>
         <mat-card-subtitle>Learn in which cases a card appears in the upcoming view</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>Starting with Deck 1.5 cards will appear in the upcoming view if they are <em>not marked as <code>completed</code></em> and additionally one of the following two cases matches:</p>
+        <p>Starting with Deck 1.5 cards will appear in the upcoming view if they are <em>not marked as
+                <code>completed</code></em> and additionally one of the following two cases matches:</p>
         <ul>
             <li>Card has a due date <strong>and</strong> card is in a not shared board</li>
             <li>Card is in a board which is also shared with others <strong>and</strong> one of the following two cases
@@ -68,12 +75,15 @@
                 href="https://github.com/stefan-niedermann/nextcloud-deck/issues/962" target="_blank">from
                 <strong>all</strong> accounts</a>.</p>
     </mat-card-content>
-    <mat-card-actions>
-        <a mat-button target="_blank"
-            href="https://github.com/nextcloud/deck/issues/new?assignees=&labels=&template=Feature_request.md">Propose change</a>
-    </mat-card-actions>
+    <mat-card-footer>
+        <mat-card-actions>
+            <a mat-button target="_blank"
+                href="https://github.com/nextcloud/deck/issues/new?assignees=&labels=&template=Feature_request.md">Propose
+                change</a>
+        </mat-card-actions>
+    </mat-card-footer>
 </mat-card>
-<mat-card appearance="outlined">
+<mat-card>
     <mat-card-header>
         <img mat-card-avatar
             src="https://raw.githubusercontent.com/stefan-niedermann/nextcloud-deck/master/app/src/main/ic_launcher-web.png"
@@ -83,12 +93,14 @@
     </mat-card-header>
     <img mat-card-image src="../../assets/nextcloud-deck-android.jpg" alt="Photo of Nextcloud Deck Android app">
     <mat-card-content>
-        Did you know? There is an open source Android client for the Nextcloud Deck app, available at the <a
-            href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play">Google Play
-            Store</a>.
+        <p>Did you know? There is an open source Android client for the Nextcloud Deck app, available at the <a
+                href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play">Google Play
+                Store</a>.</p>
     </mat-card-content>
-    <mat-card-actions>
-        <a mat-button target="_blank"
-            href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play">Download</a>
-    </mat-card-actions>
+    <mat-card-footer>
+        <mat-card-actions>
+            <a mat-button
+                href="https://play.google.com/store/apps/details?id=it.niedermann.nextcloud.deck.play">Download</a>
+        </mat-card-actions>
+    </mat-card-footer>
 </mat-card>

@@ -10,24 +10,20 @@
         margin: auto;
 
         grid-template-columns: repeat(2, 50%);
-        /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
         mat-card:first-child {
             grid-column: 1 / span 2
         }
     }
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card-content {
     line-height: 1.5;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card-actions {
-    text-transform: uppercase;
+    --mdc-text-button-label-text-transform: uppercase;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of slide-toggle that may no longer apply for the MDC version. */
 mat-slide-toggle {
     display: inline-block;
     padding: .5rem 0;
@@ -39,11 +35,26 @@ mat-icon {
     height: auto;
 }
 
-/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
 mat-card.result {
     border-bottom: .3rem solid #E9322D;
 
     &.visible {
         border-color: #46BA61;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+.explanation {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    a {
+        align-self: center;
     }
 }
