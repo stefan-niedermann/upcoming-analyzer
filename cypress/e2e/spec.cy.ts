@@ -53,6 +53,9 @@ describe('Analyzer main screen', () => {
     cases.forEach(([description, expected]) => {
       cy.visit('/');
 
+      if (description.isDone) {
+        cy.get('[formControlName="isDone"]').click()
+      }
       if (description.isSharedBoard) {
         cy.get('[formControlName="isSharedBoard"]').click()
       }
