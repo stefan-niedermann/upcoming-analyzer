@@ -12,6 +12,9 @@
     </mat-card-header>
     <mat-card-content>
         <form [formGroup]="form">
+            <mat-slide-toggle formControlName="isDone"  matTooltip="Available since Deck 1.12.0" matTooltipPosition="after">
+                Is your card <strong>marked as completed</strong>?
+            </mat-slide-toggle><br />
             <mat-slide-toggle formControlName="isSharedBoard">
                 Is your card on a <strong>shared board</strong>?
             </mat-slide-toggle><br />
@@ -47,7 +50,7 @@
         <mat-card-subtitle>Learn in which cases a card appears in the upcoming view</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <p>Starting with Deck 1.5 cards will appear in the upcoming view if one of the following two cases matches:</p>
+        <p>Starting with Deck 1.5 cards will appear in the upcoming view if they are <em>not marked as <code>completed</code></em> and additionally one of the following two cases matches:</p>
         <ul>
             <li>Card has a due date <strong>and</strong> card is in a not shared board</li>
             <li>Card is in a board which is also shared with others <strong>and</strong> one of the following two cases

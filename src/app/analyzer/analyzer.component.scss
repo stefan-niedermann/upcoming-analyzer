@@ -10,6 +10,7 @@
         margin: auto;
 
         grid-template-columns: repeat(2, 50%);
+
         mat-card:first-child {
             grid-column: 1 / span 2
         }
@@ -25,7 +26,8 @@ mat-card-actions {
 }
 
 mat-slide-toggle {
-    display: block;
+    display: inline-block;
+    padding: .5rem 0;
 }
 
 mat-icon {
@@ -36,6 +38,7 @@ mat-icon {
 
 mat-card.result {
     border-bottom: .3rem solid #E9322D;
+
     &.visible {
         border-color: #46BA61;
     }
