@@ -8,6 +8,7 @@ $nextcloud-theme: mat.define-dark-theme($nextcloud-theme-properties);
     background-color: #303030;
   }
 
+  @include mat.all-component-typographies();
   @include mat.core();
   @include mat.all-component-themes($nextcloud-theme);
 }

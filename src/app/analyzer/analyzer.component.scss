@@ -10,7 +10,6 @@
         margin: auto;
 
         grid-template-columns: repeat(2, 50%);
-
         mat-card:first-child {
             grid-column: 1 / span 2
         }
@@ -22,7 +21,7 @@ mat-card-content {
 }
 
 mat-card-actions {
-    text-transform: uppercase;
+    --mdc-text-button-label-text-transform: uppercase;
 }
 
 mat-slide-toggle {
@@ -41,5 +40,21 @@ mat-card.result {
 
     &.visible {
         border-color: #46BA61;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+.explanation {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    a {
+        align-self: center;
     }
 }

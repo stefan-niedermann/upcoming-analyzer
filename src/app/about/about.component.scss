@@ -21,8 +21,14 @@
 }
 
 .license-avatar {
-    background: #303030;
+    background-color: #303030;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (prefers-color-scheme: light) {
+    .license-avatar {
+        background-color: #eee;
+    }
 }

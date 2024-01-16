@@ -4,6 +4,11 @@
 $nextcloud-theme: mat.define-light-theme($nextcloud-theme-properties);
 
 @layer material {
+  body {
+    background-color: #f5f5f5;
+  }
+  
+  @include mat.all-component-typographies();
   @include mat.core();
   @include mat.all-component-themes($nextcloud-theme);
 }
