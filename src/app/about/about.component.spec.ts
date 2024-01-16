@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MockProvider } from 'ng-mocks';
 import { EMPTY } from 'rxjs';
 import { LicensesService } from './licenses/licenses.service';
 import { AboutComponent } from './about.component';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;

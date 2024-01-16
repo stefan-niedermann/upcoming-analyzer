@@ -10,6 +10,7 @@
         margin: auto;
 
         grid-template-columns: repeat(2, 50%);
+        /* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
         mat-card:nth-child(n+3) {
             grid-column: 1 / span 2
         }

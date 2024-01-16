@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card appearance="outlined">
     <p>This app attempts to provide an easy guide to analyze <a
             href="https://help.nextcloud.com/t/deck-upcoming-cards-how-does-the-filter-work-configurable/121690/2?u=stefan-niedermann">why
             your card does not appear in the upcoming cards view</a> of the <a
             href="https://apps.nextcloud.com/apps/deck">Nextcloud Deck</a> app.</p>
 </mat-card>
-<mat-card>
+<mat-card appearance="outlined">
     <mat-card-header>
         <mat-icon mat-card-avatar>help</mat-icon>
         <mat-card-title>Describe your card</mat-card-title>
@@ -30,7 +30,7 @@
         </form>
     </mat-card-content>
 </mat-card>
-<mat-card *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context" class="result" [class.visible]="context.cardIsVisible">
+<mat-card appearance="outlined" *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context" class="result" [class.visible]="context.cardIsVisible">
     <mat-card-header>
         <mat-icon mat-card-avatar>{{context.cardIsVisible ?
             'visibility' : 'visibility_off'}}</mat-icon>
@@ -43,7 +43,7 @@
         <a *ngIf="(hint$ | async) === hintRef.CARD_SHOULD_BE_SHOWN" mat-raised-button color="primary" matTooltip="The card is not shown?" matTooltipPosition="right" href="https://github.com/stefan-niedermann/upcoming-analyzer/issues/new" target="_blank">Report bug</a>
     </mat-card-content>
 </mat-card>
-<mat-card>
+<mat-card appearance="outlined">
     <mat-card-header>
         <mat-icon mat-card-avatar>info</mat-icon>
         <mat-card-title>Rules</mat-card-title>
@@ -73,7 +73,7 @@
             href="https://github.com/nextcloud/deck/issues/new?assignees=&labels=&template=Feature_request.md">Propose change</a>
     </mat-card-actions>
 </mat-card>
-<mat-card>
+<mat-card appearance="outlined">
     <mat-card-header>
         <img mat-card-avatar
             src="https://raw.githubusercontent.com/stefan-niedermann/nextcloud-deck/master/app/src/main/ic_launcher-web.png"
