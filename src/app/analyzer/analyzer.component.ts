@@ -28,11 +28,11 @@ export class AnalyzerComponent {
   )
 
   protected readonly cardIsVisible$: Observable<boolean> = this.cardDescription$.pipe(
-    map(next => this.analyzerService.isVisible(next))
+    map(cardDescription => this.analyzerService.isVisible(cardDescription))
   )
 
   protected readonly hint$: Observable<Hint> = this.cardDescription$.pipe(
-    map(next => this.analyzerService.mapCardDescriptionToHint(next))
+    map(cardDescription => this.analyzerService.mapCardDescriptionToHint(cardDescription))
   )
 
   constructor(
@@ -45,19 +45,29 @@ export class AnalyzerComponent {
    * Assigning someone else is only possible if the card is on a shared board.
    */
   private connectSharedBoardAndOtherAssignees(): void {
-    if (!this.form.controls.isSharedBoard.value) {
-      this.form.controls.someoneElseAssigned.disable()
+    this.form.controls.isSharedBoard.valueChanges.pipe(
+      takeUntilDestroyed(),
+      startWith(this.form.controls.isSharedBoard.value)
+    ).subscribe(isSharedBoardEnabled => {
+      isSharedBoardEnabled
+        ? this.enableSomeoneElseAssigned()
+        : this.disableSomeoneElseAssigned()
+    })
+  }
+
+  private enableSomeoneElseAssigned() {
+    if (!this.form.controls.someoneElseAssigned.enabled) {
+      this.form.controls.someoneElseAssigned.enable()
+    }
+  }
+
+  private disableSomeoneElseAssigned() {
+    if (this.form.controls.someoneElseAssigned.value === true) {
+      this.form.controls.someoneElseAssigned.setValue(false)
     }
 
-    this.form.controls.isSharedBoard.valueChanges
-      .pipe(takeUntilDestroyed())
-      .subscribe(next => {
-        if (next) {
-          this.form.controls.someoneElseAssigned.enable()
-        } else {
-          this.form.controls.someoneElseAssigned.setValue(false)
-          this.form.controls.someoneElseAssigned.disable()
-        }
-      })
+    if (this.form.controls.someoneElseAssigned.enabled) {
+      this.form.controls.someoneElseAssigned.disable()
+    }
   }
 }
