@@ -47,6 +47,6 @@
         <p>All contributions to this app itself are considered to be licensed under the <a
                 mat-raised-button href="https://github.com/stefan-niedermann/upcoming-analyzer/blob/main/LICENSE">GPL
                 3+</a>.</p>
-        <p [innerHTML]="licenses"></p>
+        <p [innerHTML]="licensesService.licenseInformation$ | async"></p>
     </mat-card-content>
 </mat-card>

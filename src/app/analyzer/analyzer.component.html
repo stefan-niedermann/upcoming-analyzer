@@ -33,22 +33,27 @@
         </form>
     </mat-card-content>
 </mat-card>
-<mat-card *ngIf="{ cardIsVisible: cardIsVisible$ | async } as context" class="result"
-    [class.visible]="context.cardIsVisible">
-    <mat-card-header>
-        <mat-icon mat-card-avatar>{{context.cardIsVisible ?
-            'visibility' : 'visibility_off'}}</mat-icon>
-        <mat-card-title>{{context.cardIsVisible ? 'Card is visible' : 'Card is not visible'}}</mat-card-title>
-        <mat-card-subtitle>{{context.cardIsVisible ? 'Congratulations!' : 'Check out the hints below'}}
-        </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content class="explanation">
-        <p>{{hint$ | async}}</p>
-        <a *ngIf="(hint$ | async) === hintRef.CARD_SHOULD_BE_SHOWN" mat-raised-button color="primary"
-            matTooltip="The card is not shown?" matTooltipPosition="right"
-            href="https://github.com/stefan-niedermann/upcoming-analyzer/issues/new" target="_blank">Report bug</a>
-    </mat-card-content>
-</mat-card>
+@if (cardIsVisible$ | async; as cardIsVisible === true) {
+<ng-container [ngTemplateOutlet]="result" [ngTemplateOutletContext]="{cardIsVisible: true}"></ng-container>
+} @else {
+<ng-container [ngTemplateOutlet]="result" [ngTemplateOutletContext]="{cardIsVisible: false}"></ng-container>
+}
+<ng-template #result let-cardIsVisible="cardIsVisible">
+    <mat-card class="result" [class.visible]="cardIsVisible">
+        <mat-card-header>
+            <mat-icon mat-card-avatar>{{cardIsVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-card-title>{{cardIsVisible ? 'Card is visible' : 'Card is not visible'}}</mat-card-title>
+            <mat-card-subtitle>{{cardIsVisible ? 'Congratulations!' : 'Check out the hints below'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="explanation">
+            <p>{{hint$ | async}}</p>
+            @if ((hint$ | async) === Hint.CARD_SHOULD_BE_SHOWN) {
+            <a mat-raised-button color="primary" matTooltip="The card is not shown?" matTooltipPosition="right"
+                href="https://github.com/stefan-niedermann/upcoming-analyzer/issues/new" target="_blank">Report bug</a>
+            }
+        </mat-card-content>
+    </mat-card>
+</ng-template>
 <mat-card>
     <mat-card-header>
         <mat-icon mat-card-avatar>info</mat-icon>

@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MockProvider } from 'ng-mocks';
 import { EMPTY } from 'rxjs';
-import { LicensesService } from './licenses/licenses.service';
 import { AboutComponent } from './about.component';
-import { MatButtonModule } from '@angular/material/button';
+import { LicensesService } from './licenses/licenses.service';
 
 describe('AboutComponent', () => {
   let component: AboutComponent;
@@ -20,12 +20,12 @@ describe('AboutComponent', () => {
       ],
       providers: [
         MockProvider(LicensesService, {
-          getLicenses: () => EMPTY
+          licenseInformation$: EMPTY
         })
       ],
-      declarations: [ AboutComponent ]
+      declarations: [AboutComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,7 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { EMPTY, merge, Observable, of, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators'
+import { Component } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, shareReplay, startWith } from 'rxjs/operators';
 import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
 
 @Component({
@@ -9,96 +10,54 @@ import { AnalyzerService, CardDescription, Hint } from './analyzer.service';
   templateUrl: './analyzer.component.html',
   styleUrls: ['./analyzer.component.scss']
 })
-export class AnalyzerComponent implements OnDestroy {
+export class AnalyzerComponent {
 
-  form: UntypedFormGroup = new UntypedFormGroup({
-    isDone: new UntypedFormControl(),
-    isSharedBoard: new UntypedFormControl(),
-    hasDueDate: new UntypedFormControl(),
-    youAssigned: new UntypedFormControl(),
-    someoneElseAssigned: new UntypedFormControl()
-  });
+  protected readonly Hint = Hint;
 
-  private readonly unsubscribe$ = new Subject<void>();
-  private readonly isDoneCheckbox = this.form.get('isDone');
-  private readonly isSharedBoardCheckbox = this.form.get('isSharedBoard');
-  private readonly hasDueDateCheckbox = this.form.get('hasDueDate');
-  private readonly youAssignedCheckbox = this.form.get('youAssigned');
-  private readonly someoneElseAssignedCheckbox = this.form.get('someoneElseAssigned');
+  protected readonly form: FormGroup = new FormGroup({
+    isDone: new FormControl<boolean>(false),
+    isSharedBoard: new FormControl<boolean>(false),
+    hasDueDate: new FormControl<boolean>(false),
+    youAssigned: new FormControl<boolean>(false),
+    someoneElseAssigned: new FormControl<boolean>(false)
+  })
 
-  hintRef = Hint;
-  cardIsVisible$: Observable<boolean> = EMPTY;
-  hint$: Observable<Hint> = EMPTY;
+  private readonly cardDescription$: Observable<CardDescription> = this.form.valueChanges.pipe(
+    startWith(this.form.value),
+    shareReplay()
+  )
+
+  protected readonly cardIsVisible$: Observable<boolean> = this.cardDescription$.pipe(
+    map(next => this.analyzerService.isVisible(next))
+  )
+
+  protected readonly hint$: Observable<Hint> = this.cardDescription$.pipe(
+    map(next => this.analyzerService.mapCardDescriptionToHint(next))
+  )
 
   constructor(
     private readonly analyzerService: AnalyzerService
   ) {
-    const cardDescription$ = merge(
-      of(this.getInitialCardDescription()),
-      this.getCardDescription()
-    )
-
-    this.cardIsVisible$ = cardDescription$.pipe(map(next => this.analyzerService.isVisible(next)))
-    this.hint$ = cardDescription$.pipe(map(next => this.analyzerService.mapCardDescriptionToHint(next)));
-
     this.connectSharedBoardAndOtherAssignees();
-  }
-
-  /**
-   * @returns the initial CardDescription
-   */
-  private getInitialCardDescription(): CardDescription {
-    return {
-      isDone: !!this.isDoneCheckbox?.value,
-      isSharedBoard: !!this.isSharedBoardCheckbox?.value,
-      hasDueDate: !!this.hasDueDateCheckbox?.value,
-      youAssigned: !!this.youAssignedCheckbox?.value,
-      someoneElseAssigned: !!this.someoneElseAssignedCheckbox?.value
-    }
-  }
-
-  /**
-   * @returns an Observable that fires the new CardDescription everytime the user changes something 
-   */
-  private getCardDescription(): Observable<CardDescription> {
-    return merge(
-      this.isDoneCheckbox?.valueChanges || EMPTY,
-      this.isSharedBoardCheckbox?.valueChanges || EMPTY,
-      this.hasDueDateCheckbox?.valueChanges || EMPTY,
-      this.youAssignedCheckbox?.valueChanges || EMPTY,
-      this.someoneElseAssignedCheckbox?.valueChanges || EMPTY,
-    ).pipe(map(() => {
-      return {
-        isDone: this.isDoneCheckbox?.value,
-        isSharedBoard: this.isSharedBoardCheckbox?.value,
-        hasDueDate: this.hasDueDateCheckbox?.value,
-        youAssigned: this.youAssignedCheckbox?.value,
-        someoneElseAssigned: this.someoneElseAssignedCheckbox?.value
-      }
-    }))
   }
 
   /**
    * Assigning someone else is only possible if the card is on a shared board.
    */
   private connectSharedBoardAndOtherAssignees(): void {
-    if (!this.isSharedBoardCheckbox?.value) {
-      this.someoneElseAssignedCheckbox?.disable()
+    if (!this.form.controls.isSharedBoard.value) {
+      this.form.controls.someoneElseAssigned.disable()
     }
-    this.isSharedBoardCheckbox?.valueChanges
-      .pipe(takeUntil(this.unsubscribe$))
+
+    this.form.controls.isSharedBoard.valueChanges
+      .pipe(takeUntilDestroyed())
       .subscribe(next => {
         if (next) {
-          this.someoneElseAssignedCheckbox?.enable()
+          this.form.controls.someoneElseAssigned.enable()
         } else {
-          this.someoneElseAssignedCheckbox?.setValue(false)
-          this.someoneElseAssignedCheckbox?.disable()
+          this.form.controls.someoneElseAssigned.setValue(false)
+          this.form.controls.someoneElseAssigned.disable()
         }
       })
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 }
