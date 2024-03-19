@@ -23,6 +23,12 @@ updates:
         update-types:
         - "minor"
         - "patch"
+      angular-devkit:
+        patterns:
+        - "@angular-devkit/*"
+        update-types:
+        - "minor"
+        - "patch"
       typescript-eslint:
         patterns:
         - "@typescript-eslint/*"
